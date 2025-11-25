@@ -1,6 +1,6 @@
 import { describe, it, expect, vi } from "vitest";
 import { render, screen, fireEvent } from "@testing-library/react";
-import { ProductCard } from "./ProductItem";
+import { ProductCard } from "./ProductCard";
 import type { ProductItem } from "@/features/products/types/product.type";
 
 const addToCartMock = vi.fn();

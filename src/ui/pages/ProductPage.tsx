@@ -1,4 +1,4 @@
-import Products from "@/features/products/components";
+import ProductsList from "@/features/products/components";
 import { ProductSkeletonGrid } from "@/features/products/components/ProductSkeletonGrid";
 import { useProducts } from "@/features/products/hooks/useProducts";
 
@@ -17,7 +17,7 @@ export default function ProductPage() {
 
     return (
         <div className="w-full flex justify-center items-center flex-col">
-            <Products products={products || []} />
+            <ProductsList products={products || []} />
         </div>
     );
 }

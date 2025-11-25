@@ -1,4 +1,4 @@
-import type { ProductItem } from "@/features/products/types/Products";
+import type { ProductItem } from "@/features/products/types/product.type";
 import { getProductos } from "../api/productsApi";
 
 export async function fetchProducts(): Promise<ProductItem[]> {

@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useCart } from "@/features/cart/hooks/useCart";
 import { AddToCartIcon, CloseIcon, RemoveFromCartIcon } from "@/shared/ui/Icons";
 import { Button } from "@/shared/ui/Buttons";
+import { ConfirmDialog } from "@/shared/ui/ConfirmDialog";
 import { fetchProductById } from "../use-cases";
 import type { ProductItem } from "@/features/products/types/product.type";
 
@@ -15,6 +16,8 @@ export function ProductDetailModal({ productId, isOpen, onClose }: ProductDetail
     const { addToCart, removeFromCart, isInCart } = useCart();
     const [product, setProduct] = useState<ProductItem | null>(null);
     const [loading, setLoading] = useState(false);
+    const [isConfirmOpen, setIsConfirmOpen] = useState(false);
+    const [actionType, setActionType] = useState<'add' | 'remove'>('add');
 
     useEffect(() => {
         if (isOpen && productId) {
@@ -63,10 +66,21 @@ export function ProductDetailModal({ productId, isOpen, onClose }: ProductDetail
 
     const handleCartAction = () => {
         if (inCart) {
+            setActionType('remove');
+            setIsConfirmOpen(true);
+        } else {
+            setActionType('add');
+            setIsConfirmOpen(true);
+        }
+    };
+
+    const confirmAction = () => {
+        if (actionType === 'remove') {
             removeFromCart(product.id);
         } else {
             addToCart(product);
         }
+        setIsConfirmOpen(false);
     };
 
     return (
@@ -160,6 +174,21 @@ export function ProductDetailModal({ productId, isOpen, onClose }: ProductDetail
                     </div>
                 </div>
             </div>
+
+            <ConfirmDialog
+                isOpen={isConfirmOpen}
+                title={actionType === 'add' ? '¿Agregar producto?' : '¿Eliminar producto?'}
+                message={
+                    actionType === 'add'
+                        ? `¿Deseas agregar "${product.title}" al carrito?`
+                        : `¿Deseas eliminar "${product.title}" del carrito?`
+                }
+                onConfirm={confirmAction}
+                onCancel={() => setIsConfirmOpen(false)}
+                confirmText={actionType === 'add' ? 'Agregar' : 'Eliminar'}
+                cancelText="Cancelar"
+                type={actionType === 'add' ? 'success' : 'danger'}
+            />
         </div>
     );
 }

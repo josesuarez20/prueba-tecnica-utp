@@ -1,6 +1,9 @@
+import { useState } from "react";
 import { useCart } from "@/features/cart/hooks/useCart";
 import { ClearCartIcon, CloseIcon, RemoveFromCartIcon } from "@/shared/ui/Icons";
 import { Button } from "@/shared/ui/Buttons";
+import { ConfirmDialog } from "@/shared/ui/ConfirmDialog";
+import type { CartItem } from "@/features/cart/types/cart.type";
 
 interface CartModalProps {
     isOpen: boolean;
@@ -9,6 +12,31 @@ interface CartModalProps {
 
 export function CartModal({ isOpen, onClose }: CartModalProps) {
     const { cart, removeFromCart, clearCart, totalItems, totalAmount } = useCart();
+    const [isConfirmRemoveOpen, setIsConfirmRemoveOpen] = useState(false);
+    const [isConfirmClearOpen, setIsConfirmClearOpen] = useState(false);
+    const [selectedItem, setSelectedItem] = useState<CartItem | null>(null);
+
+    const handleRemoveClick = (item: CartItem) => {
+        setSelectedItem(item);
+        setIsConfirmRemoveOpen(true);
+    };
+
+    const confirmRemoveItem = () => {
+        if (selectedItem) {
+            removeFromCart(selectedItem.id);
+        }
+        setIsConfirmRemoveOpen(false);
+        setSelectedItem(null);
+    };
+
+    const handleClearCartClick = () => {
+        setIsConfirmClearOpen(true);
+    };
+
+    const confirmClearCart = () => {
+        clearCart();
+        setIsConfirmClearOpen(false);
+    };
 
     if (!isOpen) return null;
 
@@ -58,7 +86,7 @@ export function CartModal({ isOpen, onClose }: CartModalProps) {
                                                 </p>
                                             </div>
                                             <button
-                                                onClick={() => removeFromCart(item.id)}
+                                                onClick={() => handleRemoveClick(item)}
                                                 className="text-red-500 hover:text-red-700 transition-colors"
                                                 title="Eliminar producto"
                                             >
@@ -98,11 +126,7 @@ export function CartModal({ isOpen, onClose }: CartModalProps) {
                             <Button
                                 variant="outline"
                                 className="w-full sm:w-auto flex items-center justify-center gap-2"
-                                onClick={() => {
-                                    if (confirm('¿Estás seguro de vaciar el carrito?')) {
-                                        clearCart();
-                                    }
-                                }}
+                                onClick={handleClearCartClick}
                             >
                                 <ClearCartIcon width={18} height={18} />
                                 Vaciar carrito
@@ -111,6 +135,35 @@ export function CartModal({ isOpen, onClose }: CartModalProps) {
                     )}
                 </div>
             </div>
+
+            <ConfirmDialog
+                isOpen={isConfirmRemoveOpen}
+                title="¿Eliminar producto?"
+                message={
+                    selectedItem
+                        ? `¿Deseas eliminar "${selectedItem.title}" del carrito?`
+                        : "¿Deseas eliminar este producto del carrito?"
+                }
+                onConfirm={confirmRemoveItem}
+                onCancel={() => {
+                    setIsConfirmRemoveOpen(false);
+                    setSelectedItem(null);
+                }}
+                confirmText="Eliminar"
+                cancelText="Cancelar"
+                type="danger"
+            />
+
+            <ConfirmDialog
+                isOpen={isConfirmClearOpen}
+                title="¿Vaciar carrito?"
+                message={`¿Estás seguro de eliminar todos los productos (${totalItems} ${totalItems === 1 ? 'producto' : 'productos'}) del carrito? Esta acción no se puede deshacer.`}
+                onConfirm={confirmClearCart}
+                onCancel={() => setIsConfirmClearOpen(false)}
+                confirmText="Vaciar carrito"
+                cancelText="Cancelar"
+                type="danger"
+            />
         </div>
     );
 }

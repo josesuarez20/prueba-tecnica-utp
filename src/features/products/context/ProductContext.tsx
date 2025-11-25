@@ -1,7 +1,6 @@
 import { createContext, useEffect, useState } from "react";
 import { fetchProducts } from "../use-cases";
-import type { ProductItem } from "@/features/products/types/Products";
-
+import type { ProductItem } from "@/features/products/types/product.type";
 interface ProductsContextType {
     products: ProductItem[];
     loading: boolean;

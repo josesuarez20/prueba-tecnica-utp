@@ -1,11 +1,11 @@
-import type { ProductItem } from '../types/Products';
-import { ProductCard } from '@/features/products/components/ProductItem';
+import { ProductCard } from '@/features/products/components/ProductCard';
+import type { ProductItem } from '@/features/products/types/product.type';
 
 interface ProductsProps {
   products?: ProductItem[];
 }
 
-function Products ({ products }: ProductsProps) {
+function ProductsList ({ products }: ProductsProps) {
   return (
     <section className="w-full bg-white mx-auto">
         <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
@@ -19,4 +19,4 @@ function Products ({ products }: ProductsProps) {
   )
 }
 
-export default Products;
+export default ProductsList;
