@@ -1,9 +1,8 @@
-import { useState } from "react";
 import { Button } from "@/shared/ui/Buttons";
 import { AddToCartIcon, PreviewIcon, RemoveFromCartIcon } from "@/shared/ui/Icons";
-import { useCart } from "@/features/cart/hooks/useCart";
 import { ProductDetailModal } from "@features/products/components/ProductDetailModal";
 import { ConfirmDialog } from "@/shared/ui/ConfirmDialog";
+import { useProductDetail, useProductCartAction } from "@/features/products/hooks";
 import type { ProductItem } from "@/features/products/types/product.type";
 
 interface ProductItemProps {
@@ -11,41 +10,15 @@ interface ProductItemProps {
 }
 
 export function ProductCard({ product }: ProductItemProps) {
-    const { addToCart, removeFromCart, isInCart } = useCart();
-    const [isDetailOpen, setIsDetailOpen] = useState(false);
-    const [selectedProductId, setSelectedProductId] = useState<number | null>(null);
-    const [isConfirmOpen, setIsConfirmOpen] = useState(false);
-    const [actionType, setActionType] = useState<'add' | 'remove'>('add');
-    const inCart = isInCart(product.id);
-
-    const handleOpenDetail = () => {
-        setSelectedProductId(product.id);
-        setIsDetailOpen(true);
-    };
-
-    const handleCloseDetail = () => {
-        setIsDetailOpen(false);
-        setSelectedProductId(null);
-    };
-
-    const handleCartAction = () => {
-        if (inCart) {
-            setActionType('remove');
-            setIsConfirmOpen(true);
-        } else {
-            setActionType('add');
-            setIsConfirmOpen(true);
-        }
-    };
-
-    const confirmAction = () => {
-        if (actionType === 'remove') {
-            removeFromCart(product.id);
-        } else {
-            addToCart(product);
-        }
-        setIsConfirmOpen(false);
-    };
+    const { isDetailOpen, selectedProductId, openDetail, closeDetail } = useProductDetail();
+    const { 
+        inCart, 
+        isConfirmOpen, 
+        actionType, 
+        handleCartAction, 
+        confirmAction, 
+        cancelAction 
+    } = useProductCartAction(product);
 
     return (
         <>
@@ -78,7 +51,7 @@ export function ProductCard({ product }: ProductItemProps) {
                     <Button 
                         variant="outline" 
                         size="small"
-                        onClick={handleOpenDetail}
+                        onClick={() => openDetail(product.id)}
                         className="flex items-center justify-center gap-2">
                         <PreviewIcon /> Ver detalles
                     </Button>
@@ -103,7 +76,7 @@ export function ProductCard({ product }: ProductItemProps) {
             <ProductDetailModal
                 productId={selectedProductId}
                 isOpen={isDetailOpen}
-                onClose={handleCloseDetail}
+                onClose={closeDetail}
             />
 
             <ConfirmDialog
@@ -115,7 +88,7 @@ export function ProductCard({ product }: ProductItemProps) {
                         : `¿Deseas eliminar "${product.title}" del carrito?`
                 }
                 onConfirm={confirmAction}
-                onCancel={() => setIsConfirmOpen(false)}
+                onCancel={cancelAction}
                 confirmText={actionType === 'add' ? 'Agregar' : 'Eliminar'}
                 cancelText="Cancelar"
                 type={actionType === 'add' ? 'success' : 'danger'}

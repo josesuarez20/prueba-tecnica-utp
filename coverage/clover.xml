@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<coverage generated="1764110817199" clover="3.2.0">
+  <project timestamp="1764110817199" name="All files">
+    <metrics statements="88" coveredstatements="42" conditionals="37" coveredconditionals="29" methods="29" coveredmethods="13" elements="154" coveredelements="84" complexity="0" loc="88" ncloc="88" packages="6" files="12" classes="12"/>
+    <package name="features.products.api">
+      <metrics statements="13" coveredstatements="3" conditionals="4" coveredconditionals="0" methods="2" coveredmethods="0"/>
+      <file name="productsApi.ts" path="/Users/jhms/Documents/PROYECTOS/REACTJS/DEMOS/06-SHOPPING-CART/prueba-tecnica-utp/src/features/products/api/productsApi.ts">
+        <metrics statements="13" coveredstatements="3" conditionals="4" coveredconditionals="0" methods="2" coveredmethods="0"/>
+        <line num="3" count="1" type="stmt"/>
+        <line num="5" count="1" type="stmt"/>
+        <line num="6" count="0" type="stmt"/>
+        <line num="7" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="8" count="0" type="stmt"/>
+        <line num="10" count="0" type="stmt"/>
+        <line num="11" count="0" type="stmt"/>
+        <line num="14" count="1" type="stmt"/>
+        <line num="15" count="0" type="stmt"/>
+        <line num="16" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="17" count="0" type="stmt"/>
+        <line num="19" count="0" type="stmt"/>
+        <line num="20" count="0" type="stmt"/>
+      </file>
+    </package>
+    <package name="features.products.components">
+      <metrics statements="4" coveredstatements="4" conditionals="16" coveredconditionals="16" methods="2" coveredmethods="2"/>
+      <file name="ProductCard.tsx" path="/Users/jhms/Documents/PROYECTOS/REACTJS/DEMOS/06-SHOPPING-CART/prueba-tecnica-utp/src/features/products/components/ProductCard.tsx">
+        <metrics statements="4" coveredstatements="4" conditionals="16" coveredconditionals="16" methods="2" coveredmethods="2"/>
+        <line num="13" count="22" type="stmt"/>
+        <line num="21" count="22" type="stmt"/>
+        <line num="23" count="22" type="stmt"/>
+        <line num="54" count="1" type="stmt"/>
+      </file>
+    </package>
+    <package name="features.products.context">
+      <metrics statements="14" coveredstatements="1" conditionals="2" coveredconditionals="0" methods="3" coveredmethods="0"/>
+      <file name="ProductContext.tsx" path="/Users/jhms/Documents/PROYECTOS/REACTJS/DEMOS/06-SHOPPING-CART/prueba-tecnica-utp/src/features/products/context/ProductContext.tsx">
+        <metrics statements="14" coveredstatements="1" conditionals="2" coveredconditionals="0" methods="3" coveredmethods="0"/>
+        <line num="10" count="1" type="stmt"/>
+        <line num="13" count="0" type="stmt"/>
+        <line num="14" count="0" type="stmt"/>
+        <line num="15" count="0" type="stmt"/>
+        <line num="17" count="0" type="stmt"/>
+        <line num="19" count="0" type="stmt"/>
+        <line num="20" count="0" type="stmt"/>
+        <line num="21" count="0" type="stmt"/>
+        <line num="22" count="0" type="stmt"/>
+        <line num="24" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="25" count="0" type="stmt"/>
+        <line num="27" count="0" type="stmt"/>
+        <line num="30" count="0" type="stmt"/>
+        <line num="33" count="0" type="stmt"/>
+      </file>
+    </package>
+    <package name="features.products.hooks">
+      <metrics statements="31" coveredstatements="25" conditionals="6" coveredconditionals="4" methods="8" coveredmethods="6"/>
+      <file name="index.ts" path="/Users/jhms/Documents/PROYECTOS/REACTJS/DEMOS/06-SHOPPING-CART/prueba-tecnica-utp/src/features/products/hooks/index.ts">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+      <file name="useProductCartAction.ts" path="/Users/jhms/Documents/PROYECTOS/REACTJS/DEMOS/06-SHOPPING-CART/prueba-tecnica-utp/src/features/products/hooks/useProductCartAction.ts">
+        <metrics statements="18" coveredstatements="18" conditionals="4" coveredconditionals="4" methods="4" coveredmethods="4"/>
+        <line num="9" count="22" type="stmt"/>
+        <line num="10" count="22" type="stmt"/>
+        <line num="11" count="22" type="stmt"/>
+        <line num="13" count="22" type="stmt"/>
+        <line num="15" count="22" type="stmt"/>
+        <line num="16" count="5" type="cond" truecount="2" falsecount="0"/>
+        <line num="17" count="2" type="stmt"/>
+        <line num="18" count="2" type="stmt"/>
+        <line num="20" count="3" type="stmt"/>
+        <line num="21" count="3" type="stmt"/>
+        <line num="25" count="22" type="stmt"/>
+        <line num="26" count="2" type="cond" truecount="2" falsecount="0"/>
+        <line num="27" count="1" type="stmt"/>
+        <line num="29" count="1" type="stmt"/>
+        <line num="31" count="2" type="stmt"/>
+        <line num="34" count="22" type="stmt"/>
+        <line num="35" count="1" type="stmt"/>
+        <line num="38" count="22" type="stmt"/>
+      </file>
+      <file name="useProductDetail.ts" path="/Users/jhms/Documents/PROYECTOS/REACTJS/DEMOS/06-SHOPPING-CART/prueba-tecnica-utp/src/features/products/hooks/useProductDetail.ts">
+        <metrics statements="9" coveredstatements="7" conditionals="0" coveredconditionals="0" methods="3" coveredmethods="2"/>
+        <line num="7" count="22" type="stmt"/>
+        <line num="8" count="22" type="stmt"/>
+        <line num="10" count="22" type="stmt"/>
+        <line num="11" count="1" type="stmt"/>
+        <line num="12" count="1" type="stmt"/>
+        <line num="15" count="22" type="stmt"/>
+        <line num="16" count="0" type="stmt"/>
+        <line num="17" count="0" type="stmt"/>
+        <line num="20" count="22" type="stmt"/>
+      </file>
+      <file name="useProducts.ts" path="/Users/jhms/Documents/PROYECTOS/REACTJS/DEMOS/06-SHOPPING-CART/prueba-tecnica-utp/src/features/products/hooks/useProducts.ts">
+        <metrics statements="4" coveredstatements="0" conditionals="2" coveredconditionals="0" methods="1" coveredmethods="0"/>
+        <line num="5" count="0" type="stmt"/>
+        <line num="7" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="8" count="0" type="stmt"/>
+        <line num="11" count="0" type="stmt"/>
+      </file>
+    </package>
+    <package name="features.products.use-cases">
+      <metrics statements="10" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="0"/>
+      <file name="fetchProductById.ts" path="/Users/jhms/Documents/PROYECTOS/REACTJS/DEMOS/06-SHOPPING-CART/prueba-tecnica-utp/src/features/products/use-cases/fetchProductById.ts">
+        <metrics statements="5" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
+        <line num="5" count="0" type="stmt"/>
+        <line num="6" count="0" type="stmt"/>
+        <line num="7" count="0" type="stmt"/>
+        <line num="9" count="0" type="stmt"/>
+        <line num="10" count="0" type="stmt"/>
+      </file>
+      <file name="fetchProducts.ts" path="/Users/jhms/Documents/PROYECTOS/REACTJS/DEMOS/06-SHOPPING-CART/prueba-tecnica-utp/src/features/products/use-cases/fetchProducts.ts">
+        <metrics statements="5" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
+        <line num="5" count="0" type="stmt"/>
+        <line num="6" count="0" type="stmt"/>
+        <line num="7" count="0" type="stmt"/>
+        <line num="9" count="0" type="stmt"/>
+        <line num="10" count="0" type="stmt"/>
+      </file>
+      <file name="index.ts" path="/Users/jhms/Documents/PROYECTOS/REACTJS/DEMOS/06-SHOPPING-CART/prueba-tecnica-utp/src/features/products/use-cases/index.ts">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+    </package>
+    <package name="shared.ui">
+      <metrics statements="16" coveredstatements="9" conditionals="9" coveredconditionals="9" methods="12" coveredmethods="5"/>
+      <file name="Buttons.tsx" path="/Users/jhms/Documents/PROYECTOS/REACTJS/DEMOS/06-SHOPPING-CART/prueba-tecnica-utp/src/shared/ui/Buttons.tsx">
+        <metrics statements="5" coveredstatements="5" conditionals="3" coveredconditionals="3" methods="1" coveredmethods="1"/>
+        <line num="17" count="44" type="stmt"/>
+        <line num="18" count="44" type="stmt"/>
+        <line num="24" count="44" type="stmt"/>
+        <line num="30" count="44" type="stmt"/>
+        <line num="31" count="44" type="stmt"/>
+      </file>
+      <file name="Icons.tsx" path="/Users/jhms/Documents/PROYECTOS/REACTJS/DEMOS/06-SHOPPING-CART/prueba-tecnica-utp/src/shared/ui/Icons.tsx">
+        <metrics statements="11" coveredstatements="4" conditionals="6" coveredconditionals="6" methods="11" coveredmethods="4"/>
+        <line num="20" count="44" type="stmt"/>
+        <line num="28" count="16" type="stmt"/>
+        <line num="41" count="6" type="stmt"/>
+        <line num="55" count="0" type="stmt"/>
+        <line num="68" count="0" type="stmt"/>
+        <line num="80" count="0" type="stmt"/>
+        <line num="90" count="0" type="stmt"/>
+        <line num="99" count="0" type="stmt"/>
+        <line num="108" count="0" type="stmt"/>
+        <line num="118" count="0" type="stmt"/>
+        <line num="128" count="22" type="stmt"/>
+      </file>
+    </package>
+  </project>
+</coverage>

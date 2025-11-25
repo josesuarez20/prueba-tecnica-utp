@@ -24,9 +24,21 @@ vi.mock("@/features/products/components/ProductDetailModal", () => ({
     ProductDetailModal: () => <div role="dialog">Mock Modal</div>
 }));
 
-// Mock del ConfirmDialog
+// Mock del ConfirmDialog con funcionalidad
 vi.mock("@/shared/ui/ConfirmDialog", () => ({
-    ConfirmDialog: () => null
+    ConfirmDialog: ({ isOpen, onConfirm, onCancel, title }: { 
+        isOpen: boolean; 
+        onConfirm: () => void; 
+        onCancel: () => void; 
+        title: string;
+    }) => 
+        isOpen ? (
+            <div data-testid="confirm-dialog">
+                <h2>{title}</h2>
+                <button onClick={onConfirm}>Confirmar</button>
+                <button onClick={onCancel}>Cancelar</button>
+            </div>
+        ) : null
 }));
 
     const mockProduct: ProductItem = {
@@ -98,5 +110,89 @@ describe("ProductCard", () => {
 
         fireEvent.click(screen.getByText("Ver detalles"));
         expect(screen.getByRole("dialog")).toBeInTheDocument();
+    });
+
+    it("muestra el modal de confirmación al intentar agregar al carrito", () => {
+        render(<ProductCard product={mockProduct} />);
+
+        const addButton = screen.getByText("Agregar");
+        fireEvent.click(addButton);
+
+        expect(screen.getByTestId("confirm-dialog")).toBeInTheDocument();
+        expect(screen.getByText("¿Agregar producto?")).toBeInTheDocument();
+    });
+
+    it("muestra el modal de confirmación al intentar eliminar del carrito", () => {
+        isInCartMock.mockReturnValue(true);
+        render(<ProductCard product={mockProduct} />);
+
+        const removeButton = screen.getByText("Eliminar");
+        fireEvent.click(removeButton);
+
+        expect(screen.getByTestId("confirm-dialog")).toBeInTheDocument();
+        expect(screen.getByText("¿Eliminar producto?")).toBeInTheDocument();
+        
+        isInCartMock.mockReturnValue(false);
+    });
+
+    it("agrega el producto al carrito después de confirmar", () => {
+        render(<ProductCard product={mockProduct} />);
+
+        const addButton = screen.getByText("Agregar");
+        fireEvent.click(addButton);
+
+        const confirmButton = screen.getByText("Confirmar");
+        fireEvent.click(confirmButton);
+
+        expect(addToCartMock).toHaveBeenCalledWith(mockProduct);
+    });
+
+    it("elimina el producto del carrito después de confirmar", () => {
+        isInCartMock.mockReturnValue(true);
+        render(<ProductCard product={mockProduct} />);
+
+        const removeButton = screen.getByText("Eliminar");
+        fireEvent.click(removeButton);
+
+        const confirmButton = screen.getByText("Confirmar");
+        fireEvent.click(confirmButton);
+
+        expect(removeFromCartMock).toHaveBeenCalledWith(mockProduct.id);
+        
+        isInCartMock.mockReturnValue(false);
+    });
+
+    it("cierra el modal de confirmación al cancelar", () => {
+        render(<ProductCard product={mockProduct} />);
+
+        const addButton = screen.getByText("Agregar");
+        fireEvent.click(addButton);
+
+        expect(screen.getByTestId("confirm-dialog")).toBeInTheDocument();
+
+        const cancelButton = screen.getByText("Cancelar");
+        fireEvent.click(cancelButton);
+
+        expect(screen.queryByTestId("confirm-dialog")).not.toBeInTheDocument();
+    });
+
+    it("muestra el badge de descuento cuando hay descuento", () => {
+        render(<ProductCard product={mockProduct} />);
+
+        expect(screen.getByText("-10%")).toBeInTheDocument();
+    });
+
+    it("muestra el precio original tachado cuando hay descuento", () => {
+        render(<ProductCard product={mockProduct} />);
+
+        const originalPrice = (mockProduct.price / (1 - mockProduct.discountPercentage / 100)).toFixed(2);
+        expect(screen.getByText(`$${originalPrice}`)).toBeInTheDocument();
+    });
+
+    it("no muestra el badge de descuento cuando no hay descuento", () => {
+        const productWithoutDiscount = { ...mockProduct, discountPercentage: 0 };
+        render(<ProductCard product={productWithoutDiscount} />);
+
+        expect(screen.queryByText("-0%")).not.toBeInTheDocument();
     });
 });
